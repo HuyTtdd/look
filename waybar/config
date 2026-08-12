@@ -1,0 +1,134 @@
+{
+    "layer": "top",
+        // "output": [],
+        "position": "top",
+        "height": 25,
+        // "width": 1280, // Waybar width
+        "modules-left": ["hyprland/workspaces", "custom/media"],
+        "modules-center": ["hyprland/window"],
+        "modules-right": ["custom/media", "tray", "pulseaudio", "privacy", "network", "clock", "custom/notification"],
+        "spacing": 4, // Gaps between modules (4px)
+                      // Modules configuration
+        "hyprland/workspaces": {
+            "enable-bar-scroll": false,
+            "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"m-1\" })'",
+            "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"m+1\" })'",
+            "on-click": "activate",
+            "all-outputs": false,
+            "warp-on-scroll": false,
+            "format": "{icon}",
+            "format-window-separator": "<space>",
+            "format-icons": {
+                "1": " DCat",
+                "2": " Matrix",
+                "3": " Utils",
+                "4": " Stash"
+            },
+            "persistent-workspaces": {
+                "*": 4
+            }
+        },
+        "keyboard-state": {
+            "numlock": false,
+            "capslock": false,
+            "format": "{name} {icon}",
+            "format-icons": {
+                "locked": "",
+                "unlocked": ""
+            }
+        },
+        "tray": {
+            // "icon-size": 21,
+            "spacing": 10
+        },
+        "clock": {
+            "interval": 10,
+            "format": "| {:%d %b %Y %H:%M}",
+            "tooltip-format": "<tt><big>{calendar}</big></tt>",
+            "calendar": {
+                "mode"          : "month",
+                "mode-mon-col"  : 2,
+                "weeks-pos"     : "",
+                "on-scroll"     : 1,
+                "on-click-right": "mode",
+                "format": {
+                    "months":     "<span color='#ffead3'><b>{}</b></span>",
+                    "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                    "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                    "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                }
+            },
+            "actions":  {
+                "on-click-right": "mode",
+                "on-scroll-up": "shift_up",
+                "on-scroll-down": "shift_down"
+            }
+        },
+        "network": {
+            "format-wifi": "|  ",
+            "format-ethernet": "| 󰪫 ",
+            "format-disconnected": "| Off grid ⚠",
+            "tooltip-format-wifi": "Connected: {essid}",
+        },
+        "privacy": {
+            "icon-spacing": 4,
+            "icon-size": 18,
+            "transition-duration": 250,
+            "modules": [
+                {
+                    "type": "screenshare",
+                    "tooltip": true,
+                    "tooltip-icon-size": 24
+                },
+                {
+                    "type": "audio-in",
+                    "tooltip": true,
+                    "tooltip-icon-size": 24
+                }
+            ]
+        },
+        "pulseaudio": {
+            // "scroll-step": 1, // %, can be a float
+            "format": " | {volume}% {icon}",
+            "format-muted": "󰝟",
+            "format-source": "{volume}% ",
+            "format-source-muted": "",
+            "format-icons": {
+                "default": ["", "", ""]
+            },
+            "on-click": "pavucontrol",
+            "tooltip-format": "{volume}% {icon} {format_source}"
+        },
+        "custom/media": {
+            "format": "{icon} {}",
+            "return-type": "json",
+            "max-length": 40,
+            "format-icons": {
+                "spotify": "",
+                "default": "🎜"
+            },
+            "escape": true,
+            "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+                                                                       // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+        },
+        "custom/notification": {
+            "tooltip": false,
+            "format": "{icon}",
+            "format-icons": {
+                "notification": "| <span foreground='red'><sup></sup></span>",
+                "none": "| ",
+                "dnd-notification": "| <span foreground='red'><sup></sup></span>",
+                "dnd-none": "| ",
+                "inhibited-notification": "| <span foreground='red'><sup></sup></span>",
+                "inhibited-none": "| ",
+                "dnd-inhibited-notification": "| <span foreground='red'><sup></sup></span>",
+                "dnd-inhibited-none": "| "
+            },
+            "return-type": "json",
+            "exec-if": "which swaync-client",
+            "exec": "swaync-client -swb",
+            "on-click": "swaync-client -t -sw",
+            "on-click-right": "swaync-client -d -sw",
+            "escape": true
+        },
+}

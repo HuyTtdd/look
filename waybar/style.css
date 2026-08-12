@@ -1,0 +1,115 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: RobotoMono, IosevkaNerdfont;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: rgba(36, 39, 58, 0.7);
+    border-bottom: 1px solid rgba(100, 114, 125, 0.5);
+    color: #f5c2e7;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+window#waybar.termite {
+    background-color: #3F3F3F;
+}
+
+window#waybar.chromium {
+    background-color: #000000;
+    border: none;
+}
+
+button {
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 5px;
+    margin: 0px 0px 0px 0px;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+    box-shadow: inherit;
+    text-shadow: inherit;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #f9cded;
+}
+
+#workspaces button.empty {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #7f849c;
+}
+
+#workspaces button.active {
+    font-weight: bold;
+    background-color: #8e718b;
+    color: #ffffff;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#mode {
+    background-color: #64727D;
+    border-bottom: 3px solid #ffffff;
+}
+
+#clock,
+#network,
+#pulseaudio,
+#custom-media,
+#tray {
+    color: #f5c2e7;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#custom-notification {
+    margin-right: 14px;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
